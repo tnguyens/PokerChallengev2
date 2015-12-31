@@ -1,0 +1,167 @@
+﻿@model PokerApp.Models.PokerHandFromController
+
+@{ 
+    var cards = new List<string>
+    {
+        "...",
+    "Ace of Heart",
+    "Ace of Diamond",
+    "Ace of Club",
+    "Ace of Spade",
+    "King of Heart",
+    "King of Diamond",
+    "King of Club",
+    "King of Spade",
+    "Queen of Heart",
+    "Queen of Diamond",
+    "Queen of Club",
+    "Queen of Spade",
+    "Jack of Heart",
+    "Jack of Diamond",
+    "Jack of Club",
+    "Jack of Spade",
+    "Ten of Heart",
+    "Ten of Diamond",
+    "Ten of Club",
+    "Ten of Spade",
+    "9 of Heart",
+    "9 of Diamond",
+    "9 of Club",
+    "9 of Spade",
+    "8 of Heart",
+    "8 of Diamond",
+    "8 of Club",
+    "8 of Spade",
+    "7 of Heart",
+    "7 of Diamond",
+    "7 of Club",
+    "7 of Spade",
+    "6 of Heart",
+    "6 of Diamond",
+    "6 of Club",
+    "6 of Spade",
+    "5 of Heart",
+    "5 of Diamond",
+    "5 of Club",
+    "5 of Spade",
+    "4 of Heart",
+    "4 of Diamond",
+    "4 of Club",
+    "4 of Spade",
+    "3 of Heart",
+    "3 of Diamond",
+    "3 of Club",
+    "3 of Spade",
+    "2 of Heart",
+    "2 of Diamond",
+    "2 of Club",
+    "2 of Spade"
+    };
+}
+
+<head>
+    <meta charset="UTF-8">
+    <title>The Game of Poker</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/style/page_layout.css">
+</head>
+
+
+<h2>Shall we play?</h2>
+
+@using (Html.BeginForm("DetermineWinner", "Poker", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div><h3>Player 1</h3></div>
+    <div class="center">
+        <select name="Player1Card1">
+            @for (int i = 0; i < cards.Count; i++)
+            {
+                <option value="@i">@cards[i]</option>
+            }
+        </select>
+
+        <select name="Player1Card2">
+            @for (int i = 0; i < cards.Count; i++)
+            {
+                <option value="@i">@cards[i]</option>
+            }
+        </select>
+
+        <select name="Player1Card3">
+            @for (int i = 0; i < cards.Count; i++)
+            {
+                <option value="@i">@cards[i]</option>
+            }
+        </select>
+
+        <select name="Player1Card4">
+            @for (int i = 0; i < cards.Count; i++)
+            {
+                <option value="@i">@cards[i]</option>
+            }
+        </select>
+
+        <select name="Player1Card5">
+            @for (int i = 0; i < cards.Count; i++)
+            {
+                <option value="@i">@cards[i]</option>
+            }
+        </select>
+    </div>
+
+    <div><h3>Player 2</h3></div>
+    <div class="center">
+        <select name="Player2Card1">
+            @for (int i = 0; i < cards.Count; i++)
+            {
+                <option value="@i">@cards[i]</option>
+            }
+        </select>
+
+        <select name="Player2Card2">
+            @for (int i = 0; i < cards.Count; i++)
+            {
+                <option value="@i">@cards[i]</option>
+            }
+        </select>
+
+        <select name="Player2Card3">
+            @for (int i = 0; i < cards.Count; i++)
+            {
+                <option value="@i">@cards[i]</option>
+            }
+        </select>
+
+        <select name="Player2Card4">
+            @for (int i = 0; i < cards.Count; i++)
+            {
+                <option value="@i">@cards[i]</option>
+            }
+        </select>
+
+        <select name="Player2Card5">
+            @for (int i = 0; i < cards.Count; i++)
+            {
+                <option value="@i">@cards[i]</option>
+            }
+        </select>
+    </div>
+
+    <div class="center">
+       <!-- <button type="submit">Evaluate</button>  -->
+        <div><input class="myButton" type="submit" name="evaluate" id="evaluate" value="Evaluate"></div>
+    </div> 
+
+}
+
+        @if (Model != null && Model.Winner != null)
+        {
+            <!--<span>The winner is @Model.Winner</span>-->
+            <div class="center">
+                <answerbox name="output" id="output"> The Winner is @Model.Winner</answerbox>
+            </div>
+            <p class="center">@Model.Error</p>
+            <div class="center">
+                <p>Player 1: @Model.Player2Wins win(s)</p>
+                <p>Player 2: @Model.Player2Wins win(s)</p>
+            </div>
+        }
