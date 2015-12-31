@@ -28,6 +28,19 @@ answerBox{
     text-align: center;
 }
 
+errMsg{
+    font-weight:normal;
+    color:#F03F13;
+    letter-spacing:0pt;
+    word-spacing:2pt;
+    font-size:20px;
+    text-align:center;
+    font-family:times new roman, times, serif;
+    line-height:1;
+    margin:0px;
+    padding:0px;
+}
+
 .center{
     text-align: center;
 }
@@ -84,13 +97,3 @@ answerBox{
     top:1px;
 }
 
-errormessage{
-    font-weight:normal;
-    color:#F03F13;
-    letter-spacing:0pt;
-    word-spacing:2pt;
-    font-size:20px;
-    text-align:center;
-    font-family:impact, sans-serif;
-    line-height:1;
-}

@@ -156,11 +156,13 @@
         @if (Model != null && Model.Winner != null)
         {
             <!--<span>The winner is @Model.Winner</span>-->
-            <div class="center">
+            <div class="center" id="resultBox">
                 <answerbox name="output" id="output"> The Winner is @Model.Winner</answerbox>
             </div>
-            <erromessage>@Model.Error</erromessage>
-            <div class="center">
+            <div class="center" id="errorBox">
+                <errMsg>@Model.Error</errMsg>
+            </div>
+            <div class="center" id="scoreKeeping">
                 <p>Player 1: @Model.Player2Wins win(s)</p>
                 <p>Player 2: @Model.Player2Wins win(s)</p>
             </div>
