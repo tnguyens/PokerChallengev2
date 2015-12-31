@@ -9,8 +9,8 @@ namespace PokerApp.Models
     {
         public string Player1Card1 { get; set; }
         public List<CARD> Cards { get; set; }
-        public int HighestCard { get; }
-        public int HighestRuleCard { get; }
+        //public int HighestCard { get; }
+        public int HighestRuleCard { get; set; }
 
         //Player hand validation
         public bool isValid()
@@ -95,13 +95,19 @@ namespace PokerApp.Models
             }
         }
 
-        //finding the highest car in the player cards
+        //finding the highest card by rank in the player cards
         public int getHighCard()
         {
             sortByRank();
             return Cards[4].Rank;
         }
 
+        //finding the highest card by index in the player cards
+        public int getHighCardIndex()
+        {
+            sortByRank();
+            return Cards[4].Index;
+        }
         //Check to see if player has 1 pair
         public bool isOnePair()
         {            
@@ -113,15 +119,31 @@ namespace PokerApp.Models
 
             sortByRank();
             //XXABC
-            bool case1 = Cards[0].Rank == Cards[1].Rank;
+            if( Cards[0].Rank == Cards[1].Rank)
+            {
+                this.HighestRuleCard = Cards[0].Index;
+                return true;
+            }
             //AXXBC
-            bool case2 = Cards[1].Rank == Cards[2].Rank;
+            else if( Cards[1].Rank == Cards[2].Rank)
+            {
+                this.HighestRuleCard = Cards[1].Index;
+                return true;
+            }
             //ABXXC
-            bool case3 = Cards[2].Rank == Cards[3].Rank;
+            else if( Cards[2].Rank == Cards[3].Rank)
+            {
+                this.HighestRuleCard = Cards[2].Index;
+                return true;
+            }
             //ABCXX
-            bool case4 = Cards[3].Rank == Cards[4].Rank;
+            else if( Cards[3].Rank == Cards[4].Rank)
+            {
+                this.HighestRuleCard = Cards[3].Index;
+                return true;
+            }
 
-            return (case1 || case2 || case3 || case4);
+            return false;
         }
 
         //checking player hands has 2 pairs
@@ -134,17 +156,29 @@ namespace PokerApp.Models
             }
 
             sortByRank();
-            //XXYYX
-            bool case1 = Cards[0].Rank == Cards[1].Rank
-                    && Cards[2].Rank == Cards[3].Rank;
+            //XXYYZ
+            if( Cards[0].Rank == Cards[1].Rank
+                    && Cards[2].Rank == Cards[3].Rank)
+            {
+                this.HighestRuleCard = Cards[3].Index;
+                return true;
+            }
             //XXYZZ
-            bool case2 = Cards[0].Rank == Cards[1].Rank
-                    && Cards[3].Rank == Cards[4].Rank;
+            else if( Cards[0].Rank == Cards[1].Rank
+                    && Cards[3].Rank == Cards[4].Rank)
+            {
+                this.HighestRuleCard = Cards[4].Index;
+                return true;
+            }
             //XYYZZ
-            bool case3 = Cards[1].Rank == Cards[2].Rank
-                    && Cards[3].Rank == Cards[4].Rank;
+            else if( Cards[1].Rank == Cards[2].Rank
+                    && Cards[3].Rank == Cards[4].Rank)
+            {
+                this.HighestRuleCard = Cards[4].Index;
+                return true;
+            }
 
-            return (case1 || case2 || case3);
+            return false;
         }
 
         //checking player hand for 3 of a kind
@@ -158,16 +192,28 @@ namespace PokerApp.Models
 
             sortByRank();
             //XXXYZ
-            bool case1 = Cards[0].Rank == Cards[1].Rank
-                    && Cards[1].Rank == Cards[2].Rank;
+            if( Cards[0].Rank == Cards[1].Rank
+                    && Cards[1].Rank == Cards[2].Rank)
+            {
+                this.HighestRuleCard = Cards[2].Index;
+                return true;
+            }
             //XYYYZ
-            bool case2 = Cards[1].Rank == Cards[2].Rank
-                    && Cards[2].Rank == Cards[3].Rank;
+            else if( Cards[1].Rank == Cards[2].Rank
+                    && Cards[2].Rank == Cards[3].Rank)
+            {
+                this.HighestRuleCard = Cards[3].Index;
+                return true;
+            }
             //XYZZZ
-            bool case3 = Cards[2].Rank == Cards[3].Rank
-                    && Cards[3].Rank == Cards[4].Rank;
+            else if( Cards[2].Rank == Cards[3].Rank
+                    && Cards[3].Rank == Cards[4].Rank)
+            {
+                this.HighestRuleCard = Cards[4].Index;
+                return true;
+            }
 
-            return (case1 || case2 || case3);
+            return false;
         }
 
         public bool isStraight()
@@ -179,16 +225,23 @@ namespace PokerApp.Models
             if (Cards[4].Rank == 0)
             {   
                 //case where 2345A
-                bool a = Cards[0].Rank == 12
+                if( Cards[0].Rank == 12
                         && Cards[1].Rank == 11
                         && Cards[2].Rank == 10
-                        && Cards[3].Rank == 9;
+                        && Cards[3].Rank == 9)
+                {
+                    this.HighestRuleCard = Cards[3].Index;
+                    return true;
+                }
                 //case where TJQKA
-                bool b = Cards[0].Rank == 4
+                else if( Cards[0].Rank == 4
                         && Cards[1].Rank == 3
                         && Cards[2].Rank == 2
-                        && Cards[3].Rank == 1;
-                return (a || b);
+                        && Cards[3].Rank == 1)
+                {
+                    this.HighestRuleCard = Cards[4].Index;
+                    return true;
+                }
             }
             //other cases cards are continuos of each other
             else
@@ -200,9 +253,10 @@ namespace PokerApp.Models
                         return false;
                     ranking--;
                 }
-
+                this.HighestRuleCard = Cards[4].Index;
                 return true;
             }
+            return false;
         }
 
         //check for player hand is a flush, all cards has a same suit
@@ -210,7 +264,12 @@ namespace PokerApp.Models
         {
             sortBySuit();
             //AAAAA
-            return (Cards[0].Suit == Cards[4].Suit);
+            if(Cards[0].Suit == Cards[4].Suit)
+            {
+                this.HighestRuleCard = Cards[4].Index;
+                return true;
+            }
+            return false;
         }
 
         //check for player hand is a fullhouse
@@ -218,15 +277,23 @@ namespace PokerApp.Models
         {
             sortByRank();
             //XXXYY
-            bool case1 = (Cards[0].Rank == Cards[1].Rank)
+            if( (Cards[0].Rank == Cards[1].Rank)
                     && (Cards[1].Rank == Cards[2].Rank)
-                    && (Cards[3].Rank == Cards[4].Rank);
+                    && (Cards[3].Rank == Cards[4].Rank))
+            {
+                this.HighestRuleCard = Cards[2].Index;
+                return true;
+            }
             //XXYYY
-            bool case2 = (Cards[0].Rank == Cards[1].Rank)
+            else if((Cards[0].Rank == Cards[1].Rank)
                     && (Cards[2].Rank == Cards[3].Rank)
-                    && (Cards[3].Rank == Cards[4].Rank);
+                    && (Cards[3].Rank == Cards[4].Rank))
+            {
+                this.HighestRuleCard = Cards[4].Index;
+                return true;
+            }
 
-            return (case1 || case2);
+            return false;
         }
 
         //checking player hand has 4 of a kind
@@ -234,15 +301,23 @@ namespace PokerApp.Models
         {
             sortByRank();
             //XXXXY
-            bool case1 = (Cards[0].Rank == Cards[1].Rank)
+            if( (Cards[0].Rank == Cards[1].Rank)
                     && (Cards[1].Rank == Cards[2].Rank)
-                    && (Cards[2].Rank == Cards[3].Rank);
+                    && (Cards[2].Rank == Cards[3].Rank))
+            {
+                this.HighestRuleCard = Cards[3].Index;
+                return true;
+            }
             //XYYYY
-            bool case2 = (Cards[1].Rank == Cards[2].Rank)
+            else if( (Cards[1].Rank == Cards[2].Rank)
                     && (Cards[2].Rank == Cards[3].Rank)
-                    && (Cards[3].Rank == Cards[4].Rank);
+                    && (Cards[3].Rank == Cards[4].Rank))
+            {
+                this.HighestRuleCard = Cards[4].Index;
+                return true;
+            }
 
-            return (case1 || case2);
+            return false;
         }
 
         //checking player hand is a straight flush

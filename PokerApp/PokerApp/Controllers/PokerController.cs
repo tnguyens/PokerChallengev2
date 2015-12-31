@@ -82,29 +82,49 @@ namespace PokerApp.Controllers
                 }
                 else
                 {
-                    int player1CardSum = player1.GetCardSum();
-                    int player2CardSum = player2.GetCardSum();
-                    if (player1CardSum != player2CardSum)
+                    //for both hands do not have anything
+                    if (player1CardPoint == 0)
                     {
-                        if (player1CardSum < player2CardSum)
-                        {
-                            winner = "Player 1";
-                            errorMessage = "";
-                            player1Wins++;
-                        }
-                        else
+                        int highCard1 = player1.getHighCardIndex();
+                        int highCard2 = player2.getHighCardIndex();
+                        if (highCard1 > highCard2)
                         {
                             winner = "Player 2";
                             errorMessage = "";
                             player2Wins++;
                         }
+                        else
+                        {
+                            winner = "Player 1";
+                            errorMessage = "";
+                            player1Wins++;
+                        }
                     }
-                    else
-                    {
-                        winner = "Tie";
-                        errorMessage = "";
+                    //for both hands may have a same thing
+                    else {
+                        int player1CardSum = player1.HighestRuleCard;// player1.GetCardSum();
+                        int player2CardSum = player2.HighestRuleCard;// player2.GetCardSum();
+                        if (player1CardSum != player2CardSum)
+                        {
+                            if (player1CardSum < player2CardSum)
+                            {
+                                winner = "Player 1";
+                                errorMessage = "";
+                                player1Wins++;
+                            }
+                            else
+                            {
+                                winner = "Player 2";
+                                errorMessage = "";
+                                player2Wins++;
+                            }
+                        }
+                        else
+                        {
+                            winner = "Tie";
+                            errorMessage = "";
+                        }
                     }
-
                 }
             }
 
