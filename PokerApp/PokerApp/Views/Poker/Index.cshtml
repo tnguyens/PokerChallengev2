@@ -72,35 +72,35 @@
 {
     <div><h3>Player 1</h3></div>
     <div class="center">
-        <select name="Player1Card1">
+        <select name="Player1Card1" id="player1Card1">
             @for (int i = 0; i < cards.Count; i++)
             {
                 <option value="@i">@cards[i]</option>
             }
         </select>
 
-        <select name="Player1Card2">
+        <select name="Player1Card2" id="player1Card2">
             @for (int i = 0; i < cards.Count; i++)
             {
                 <option value="@i">@cards[i]</option>
             }
         </select>
 
-        <select name="Player1Card3">
+        <select name="Player1Card3" id="player1Card3">
             @for (int i = 0; i < cards.Count; i++)
             {
                 <option value="@i">@cards[i]</option>
             }
         </select>
 
-        <select name="Player1Card4">
+        <select name="Player1Card4" id="player1Card4">
             @for (int i = 0; i < cards.Count; i++)
             {
                 <option value="@i">@cards[i]</option>
             }
         </select>
 
-        <select name="Player1Card5">
+        <select name="Player1Card5" id="player1Card5">
             @for (int i = 0; i < cards.Count; i++)
             {
                 <option value="@i">@cards[i]</option>
@@ -110,35 +110,35 @@
 
     <div><h3>Player 2</h3></div>
     <div class="center">
-        <select name="Player2Card1">
+        <select name="Player2Card1" id="player2Card1">
             @for (int i = 0; i < cards.Count; i++)
             {
                 <option value="@i">@cards[i]</option>
             }
         </select>
 
-        <select name="Player2Card2">
+        <select name="Player2Card2" id="player2Card2">
             @for (int i = 0; i < cards.Count; i++)
             {
                 <option value="@i">@cards[i]</option>
             }
         </select>
 
-        <select name="Player2Card3">
+        <select name="Player2Card3" id="player2Card3">
             @for (int i = 0; i < cards.Count; i++)
             {
                 <option value="@i">@cards[i]</option>
             }
         </select>
 
-        <select name="Player2Card4">
+        <select name="Player2Card4" id="player2Card4">
             @for (int i = 0; i < cards.Count; i++)
             {
                 <option value="@i">@cards[i]</option>
             }
         </select>
 
-        <select name="Player2Card5">
+        <select name="Player2Card5" id="player2Card5">
             @for (int i = 0; i < cards.Count; i++)
             {
                 <option value="@i">@cards[i]</option>
@@ -147,11 +147,37 @@
     </div>
 
     <div class="center">
+        <input class="myButton" type="button" name="random hand" id="randomizer" onclick="randomCardsDeal()" value="Random Hand">
        <!-- <button type="submit">Evaluate</button>  -->
         <div><input class="myButton" type="submit" name="evaluate" id="evaluate" value="Evaluate"></div>
     </div> 
 
 }
+
+<script>
+    function execute(){
+        alert(document.getElementById('player1Card1').selectedIndex); //onclick="execute()"
+    }
+
+    function getOptionIndex(elementId){
+        return document.getElementById(elementId).selectedIndex;
+    }
+
+    function randomCardsDeal () {
+        document.getElementById('player1Card1').selectedIndex = Math.floor((Math.random() * 52) + 1);
+        document.getElementById('player1Card2').selectedIndex = Math.floor((Math.random() * 52) + 1);
+        document.getElementById('player1Card3').selectedIndex = Math.floor((Math.random() * 52) + 1);
+        document.getElementById('player1Card4').selectedIndex = Math.floor((Math.random() * 52) + 1);
+        document.getElementById('player1Card5').selectedIndex = Math.floor((Math.random() * 52) + 1);
+
+        document.getElementById('player2Card1').selectedIndex = Math.floor((Math.random() * 52) + 1);
+        document.getElementById('player2Card2').selectedIndex = Math.floor((Math.random() * 52) + 1);
+        document.getElementById('player2Card3').selectedIndex = Math.floor((Math.random() * 52) + 1);
+        document.getElementById('player2Card4').selectedIndex = Math.floor((Math.random() * 52) + 1);
+        document.getElementById('player2Card5').selectedIndex = Math.floor((Math.random() * 52) + 1);
+
+    }
+</script>
 
         @if (Model != null && Model.Winner != null)
         {
