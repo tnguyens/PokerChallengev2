@@ -19,31 +19,30 @@ namespace PokerApp.Controllers
         public ActionResult DetermineWinner(PokerHandFromView pokerHand)
         {
             //Player 1 setup
-            var player1card1 = new CARD(Int32.Parse(pokerHand.Player1Card1));
-            var player1card2 = new CARD(Int32.Parse(pokerHand.Player1Card2));
-            var player1card3 = new CARD(Int32.Parse(pokerHand.Player1Card3));
-            var player1card4 = new CARD(Int32.Parse(pokerHand.Player1Card4));
-            var player1card5 = new CARD(Int32.Parse(pokerHand.Player1Card5));
-
-            var player1 = new PLAYER
+            CARD player1card1 = new CARD(Int32.Parse(pokerHand.Player1Card1));
+            CARD player1card2 = new CARD(Int32.Parse(pokerHand.Player1Card2));
+            CARD player1card3 = new CARD(Int32.Parse(pokerHand.Player1Card3));
+            CARD player1card4 = new CARD(Int32.Parse(pokerHand.Player1Card4));
+            CARD player1card5 = new CARD(Int32.Parse(pokerHand.Player1Card5));
+            PLAYER player1 = new PLAYER
             {
                 Cards = new List<CARD> { player1card1, player1card2, player1card3, player1card4, player1card5 }
             };
             
             //player 2 setup
-            var player2card1 = new CARD(Int32.Parse(pokerHand.Player2Card1));
-            var player2card2 = new CARD(Int32.Parse(pokerHand.Player2Card2));
-            var player2card3 = new CARD(Int32.Parse(pokerHand.Player2Card3));
-            var player2card4 = new CARD(Int32.Parse(pokerHand.Player2Card4));
-            var player2card5 = new CARD(Int32.Parse(pokerHand.Player2Card5));
-            var player2 = new PLAYER
+            CARD player2card1 = new CARD(Int32.Parse(pokerHand.Player2Card1));
+            CARD player2card2 = new CARD(Int32.Parse(pokerHand.Player2Card2));
+            CARD player2card3 = new CARD(Int32.Parse(pokerHand.Player2Card3));
+            CARD player2card4 = new CARD(Int32.Parse(pokerHand.Player2Card4));
+            CARD player2card5 = new CARD(Int32.Parse(pokerHand.Player2Card5));
+            PLAYER player2 = new PLAYER
             {
                 Cards = new List<CARD> { player2card1, player2card2, player2card3, player2card4, player2card5 }
             };
 
             //return variable
-            var winner = string.Empty;
-            var errorMessage = string.Empty;
+            string winner = string.Empty;
+            string errorMessage = string.Empty;
 
             if(Session["win1s"] == null)
             {
@@ -53,8 +52,8 @@ namespace PokerApp.Controllers
             {
                 Session["win2s"] = (int) 0;
             }
-            var player1Wins = (int)Session["win1s"];
-            var player2Wins = (int)Session["win2s"];
+            int player1Wins = (int)Session["win1s"];
+            int player2Wins = (int)Session["win2s"];
                         
             //validation of cards
             //each player
@@ -75,8 +74,8 @@ namespace PokerApp.Controllers
             }
             //no error
             else {
-                var player1CardPoint = this.totalPoint(player1);
-                var player2CardPoint = this.totalPoint(player2);
+                int player1CardPoint = this.totalPoint(player1);
+                int player2CardPoint = this.totalPoint(player2);
 
                 int pointDiff = player1CardPoint - player2CardPoint;
                 if (pointDiff > 0)
@@ -142,7 +141,7 @@ namespace PokerApp.Controllers
             Session["win1s"] = (int)player1Wins;
             Session["win2s"] = (int)player2Wins;
 
-            var viewModel = new PokerHandFromController()
+            PokerHandFromController viewModel = new PokerHandFromController()
             {
                 Winner = winner,
                 Player1Wins = player1Wins,
