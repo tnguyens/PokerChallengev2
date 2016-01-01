@@ -43,8 +43,18 @@ namespace PokerApp.Controllers
             //return variable
             var winner = string.Empty;
             var errorMessage = string.Empty;
-            var player1Wins = 0;
-            var player2Wins = 0;
+
+            if(Session["win1s"] == null)
+            {
+                Session["win1s"] = (int) 0;
+            }
+            if (Session["win2s"] == null)
+            {
+                Session["win2s"] = (int) 0;
+            }
+            var player1Wins = (int)Session["win1s"];
+            var player2Wins = (int)Session["win2s"];
+                        
             //validation of cards
             //each player
             bool testValue1 = arePlayersOk(player1, player2);
@@ -128,7 +138,8 @@ namespace PokerApp.Controllers
                 }
             }
 
-            //Console.WriteLine("card1 face:{0}, suit:{1}", player1card1.Rank, player1card1.Suit);
+            Session["win1s"] = (int)player1Wins;
+            Session["win2s"] = (int)player2Wins;
 
             var viewModel = new PokerHandFromController()
             {
