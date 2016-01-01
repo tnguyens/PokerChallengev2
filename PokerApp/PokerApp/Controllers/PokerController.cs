@@ -12,6 +12,7 @@ namespace PokerApp.Controllers
         // GET: Poker
         public ActionResult Index()
         {
+            Session.Clear();
             return View();
         }
 
