@@ -5,14 +5,14 @@ using System.Web;
 
 namespace PokerApp.Models
 {
-    public class CARD
+    public class Card
     {
 
         public int Rank { get; }
         public int Suit { get; }
         public int Index { get; set; }
 
-        public CARD(int index)
+        public Card(int index)
         {
             this.Index = index;
             this.Rank = this.SetRank();

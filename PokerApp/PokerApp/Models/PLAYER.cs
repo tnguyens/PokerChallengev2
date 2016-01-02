@@ -5,10 +5,10 @@ using System.Web;
 
 namespace PokerApp.Models
 {
-    public class PLAYER
+    public class Player
     {
         public string Player1Card1 { get; set; }
-        public List<CARD> Cards { get; set; }
+        public List<Card> Cards { get; set; }
         //public int HighestCard { get; }
         public int HighestRuleCard { get; set; }
 
@@ -17,7 +17,7 @@ namespace PokerApp.Models
         {
             bool result = true;
             //check for ... card, user has not pick a card
-            if (Cards.Contains(new CARD(0)))
+            if (Cards.Contains(new Card(0)))
             {
                 result = false;
             }
@@ -67,7 +67,7 @@ namespace PokerApp.Models
                         min = j;
                     }
                 }
-                CARD temp = Cards[i];
+                Card temp = Cards[i];
                 Cards[i] = Cards[min];
                 Cards[min] = temp;
             }
@@ -89,7 +89,7 @@ namespace PokerApp.Models
                         min = j;
                     }
                 }
-                CARD temp = Cards[i];
+                Card temp = Cards[i];
                 Cards[i] = Cards[min];
                 Cards[min] = temp;
             }

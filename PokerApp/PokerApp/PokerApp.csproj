@@ -203,10 +203,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\PLAYER.cs" />
+    <Compile Include="Models\Player.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\CARD.cs" />
+    <Compile Include="Models\Card.cs" />
     <Compile Include="Models\PokerHandFromController.cs" />
     <Compile Include="Models\PokerHandFromView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -227,6 +227,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="ClassDiagram1.cd" />
+    <Content Include="ClassDiagram2.cd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

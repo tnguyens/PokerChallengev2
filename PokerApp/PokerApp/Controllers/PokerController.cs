@@ -12,6 +12,7 @@ namespace PokerApp.Controllers
         // GET: Poker
         public ActionResult Index()
         {
+            //reset score at initial point
             Session.Clear();
             return View();
         }
@@ -19,31 +20,31 @@ namespace PokerApp.Controllers
         public ActionResult DetermineWinner(PokerHandFromView pokerHand)
         {
             //Player 1 setup
-            CARD player1card1 = new CARD(Int32.Parse(pokerHand.Player1Card1));
-            CARD player1card2 = new CARD(Int32.Parse(pokerHand.Player1Card2));
-            CARD player1card3 = new CARD(Int32.Parse(pokerHand.Player1Card3));
-            CARD player1card4 = new CARD(Int32.Parse(pokerHand.Player1Card4));
-            CARD player1card5 = new CARD(Int32.Parse(pokerHand.Player1Card5));
-            PLAYER player1 = new PLAYER
+            Card player1card1 = new Card(Int32.Parse(pokerHand.Player1Card1));
+            Card player1card2 = new Card(Int32.Parse(pokerHand.Player1Card2));
+            Card player1card3 = new Card(Int32.Parse(pokerHand.Player1Card3));
+            Card player1card4 = new Card(Int32.Parse(pokerHand.Player1Card4));
+            Card player1card5 = new Card(Int32.Parse(pokerHand.Player1Card5));
+            Player player1 = new Player
             {
-                Cards = new List<CARD> { player1card1, player1card2, player1card3, player1card4, player1card5 }
+                Cards = new List<Card> { player1card1, player1card2, player1card3, player1card4, player1card5 }
             };
             
             //player 2 setup
-            CARD player2card1 = new CARD(Int32.Parse(pokerHand.Player2Card1));
-            CARD player2card2 = new CARD(Int32.Parse(pokerHand.Player2Card2));
-            CARD player2card3 = new CARD(Int32.Parse(pokerHand.Player2Card3));
-            CARD player2card4 = new CARD(Int32.Parse(pokerHand.Player2Card4));
-            CARD player2card5 = new CARD(Int32.Parse(pokerHand.Player2Card5));
-            PLAYER player2 = new PLAYER
+            Card player2card1 = new Card(Int32.Parse(pokerHand.Player2Card1));
+            Card player2card2 = new Card(Int32.Parse(pokerHand.Player2Card2));
+            Card player2card3 = new Card(Int32.Parse(pokerHand.Player2Card3));
+            Card player2card4 = new Card(Int32.Parse(pokerHand.Player2Card4));
+            Card player2card5 = new Card(Int32.Parse(pokerHand.Player2Card5));
+            Player player2 = new Player
             {
-                Cards = new List<CARD> { player2card1, player2card2, player2card3, player2card4, player2card5 }
+                Cards = new List<Card> { player2card1, player2card2, player2card3, player2card4, player2card5 }
             };
 
             //return variable
             string winner = string.Empty;
             string errorMessage = string.Empty;
-
+            //setting session values of scores
             if(Session["win1s"] == null)
             {
                 Session["win1s"] = (int) 0;
@@ -57,9 +58,10 @@ namespace PokerApp.Controllers
                         
             //validation of cards
             //each player
-            bool testValue1 = arePlayersOk(player1, player2);
-            bool testValue2 = player1.isValid();
-            bool testValue3 = player2.isValid();
+           // testing purposes variables.
+            //bool testValue1 = arePlayersOk(player1, player2);
+            //bool testValue2 = player1.isValid();
+            //bool testValue3 = player2.isValid();
 
             if (player1.isValid() == false || player2.isValid() == false)
             {
@@ -77,6 +79,7 @@ namespace PokerApp.Controllers
                 int player1CardPoint = this.totalPoint(player1);
                 int player2CardPoint = this.totalPoint(player2);
 
+                //compare points to determine winner
                 int pointDiff = player1CardPoint - player2CardPoint;
                 if (pointDiff > 0)
                 {
@@ -92,7 +95,7 @@ namespace PokerApp.Controllers
                 }
                 else
                 {
-                    //for both hands do not have anything
+                    //for both hands do not have anything, points are the same, some pair the high card of each
                     if (player1CardPoint == 0)
                     {
                         int highCard1 = player1.getHighCardIndex();
@@ -110,7 +113,7 @@ namespace PokerApp.Controllers
                             player1Wins++;
                         }
                     }
-                    //for both hands may have a same thing
+                    //for both hands may have a same thing, compare that same hand using the high card of the hand.
                     else {
                         int player1CardSum = player1.HighestRuleCard;// player1.GetCardSum();
                         int player2CardSum = player2.HighestRuleCard;// player2.GetCardSum();
@@ -129,6 +132,7 @@ namespace PokerApp.Controllers
                                 player2Wins++;
                             }
                         }
+                        //only case where game is a tie that is when the players have the same thing, which nerver happens bc of duplication checking
                         else
                         {
                             winner = "Tie";
@@ -138,9 +142,11 @@ namespace PokerApp.Controllers
                 }
             }
 
+            //score keeping setting to the session       
             Session["win1s"] = (int)player1Wins;
             Session["win2s"] = (int)player2Wins;
 
+            //create the postback msg
             PokerHandFromController viewModel = new PokerHandFromController()
             {
                 Winner = winner,
@@ -154,7 +160,7 @@ namespace PokerApp.Controllers
         }
 
         //calculate points for player
-        private int totalPoint(PLAYER playerHand)
+        private int totalPoint(Player playerHand)
         {
             //int sum = 0;
             if (playerHand.isRoyalFlush())
@@ -206,12 +212,12 @@ namespace PokerApp.Controllers
             return 0;
         }
 
-        //validation of both hands
-        private bool arePlayersOk(PLAYER a, PLAYER b)
+        //validation of both hands, no duplication in both hand
+        private bool arePlayersOk(Player a, Player b)
         {
-            foreach(CARD singleCardA in a.Cards)
+            foreach(Card singleCardA in a.Cards)
             {
-                foreach(CARD singleCardB in b.Cards)
+                foreach(Card singleCardB in b.Cards)
                 {
                     if (singleCardA.Index == singleCardB.Index)
                     {
