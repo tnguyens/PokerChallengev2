@@ -13,6 +13,9 @@ namespace PokerApp.Models
         public int HighestRuleCard { get; set; }
 
         //Player hand validation
+        //if the player has any repeating card or did not choose a card
+        //the function will return a false
+        //otherwise, return true
         public bool isValid()
         {
             bool result = true;
@@ -41,6 +44,7 @@ namespace PokerApp.Models
         }
 
         //get sum of all cards
+        //return sum of all call as a card rank power to the second
         public int GetCardSum (){
             //return this.Cards.Select(x => x.Rank).ToList().Sum();
             int sum = 0;
@@ -96,6 +100,7 @@ namespace PokerApp.Models
         }
 
         //finding the highest card by rank in the player cards
+        //return highest card of the player hand
         public int getHighCard()
         {
             sortByRank();
@@ -103,12 +108,16 @@ namespace PokerApp.Models
         }
 
         //finding the highest card by index in the player cards
+        //return the index number of the highest card in player hand
         public int getHighCardIndex()
         {
             sortByRank();
             return Cards[4].Index;
         }
+
         //Check to see if player has 1 pair
+        //return true if player has a pair
+        //false otherwise
         public bool isOnePair()
         {            
             //making sure player does not have 4ofakind, fullhouse, three of a kind or 2pairs
@@ -147,6 +156,8 @@ namespace PokerApp.Models
         }
 
         //checking player hands has 2 pairs
+        //return true if player has 2 pairs
+        //false otherwise
         public bool isTwoPair()
         {            
             //making sure player doesnot have 4ofakind, fullhouse or 3ofakind
@@ -182,6 +193,8 @@ namespace PokerApp.Models
         }
 
         //checking player hand for 3 of a kind
+        //return true if player has 3 of a kind
+        //false otherwise
         public bool isThreeOfaKind()
         {
             //maing sure the player doesnot have 4ofakind or fullhouse
@@ -216,6 +229,8 @@ namespace PokerApp.Models
             return false;
         }
 
+        //the function would return true if player has a straight
+        //and return false otherwise
         public bool isStraight()
         {
             sortByRank();
@@ -260,6 +275,8 @@ namespace PokerApp.Models
         }
 
         //check for player hand is a flush, all cards has a same suit
+        //the function would return true if player has a flush
+        //and return false otherwise
         public bool isFlush()
         {
             sortBySuit();
@@ -273,6 +290,8 @@ namespace PokerApp.Models
         }
 
         //check for player hand is a fullhouse
+        //the function return true if the player has full house
+        //and return false otherwise
         public bool isFullHouse()
         {
             sortByRank();
@@ -297,6 +316,8 @@ namespace PokerApp.Models
         }
 
         //checking player hand has 4 of a kind
+        //the function would return true if the player has a 4 of a kind
+        //and return false otherwise
         public bool isFourOfaKind()
         {
             sortByRank();
@@ -321,6 +342,8 @@ namespace PokerApp.Models
         }
 
         //checking player hand is a straight flush
+        //returns true if the player has straight flush
+        //and false otherwise
         public bool isStraightFlush()
         {
             //happens only when player has a straight and that straight is a flush
@@ -328,6 +351,8 @@ namespace PokerApp.Models
         }
 
         //checking the player hand is a royalflush
+        //return true if player has royal flush
+        //and false otherwise
         public bool isRoyalFlush()
         {   
             //happens only when the player is a straight flush and that straightflush has the high card that is an Ace

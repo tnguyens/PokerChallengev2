@@ -3,7 +3,7 @@
 @{ 
     var cards = new List<string>
     {
-        "...",
+        "Please Choose a Card",
     "Ace of Heart",
     "Ace of Diamond",
     "Ace of Club",
@@ -76,7 +76,7 @@
             @for (int i = 0; i < cards.Count; i++)
             {
                 @*<option value="@i">@cards[i]</option>*@
-                if (Model.Player1Card1 == i.ToString())
+                if (Model != null && Model.Player1Card1 == i.ToString())
                 {
                     <option value="@i" selected>@cards[i]</option>
                 }
@@ -91,7 +91,7 @@
             @for (int i = 0; i < cards.Count; i++)
             {
                 @*<option value="@i">@cards[i]</option>*@
-                if (Model.Player1Card2 == i.ToString())
+                if (Model != null && Model.Player1Card2 == i.ToString())
                 {
                     <option value="@i" selected>@cards[i]</option>
                 }
@@ -106,7 +106,7 @@
             @for (int i = 0; i < cards.Count; i++)
             {
                 @*<option value="@i">@cards[i]</option>*@
-                if (Model.Player1Card3 == i.ToString())
+                if (Model != null && Model.Player1Card3 == i.ToString())
                 {
                     <option value="@i" selected>@cards[i]</option>
                 }
@@ -121,7 +121,7 @@
             @for (int i = 0; i < cards.Count; i++)
             {
                 @*<option value="@i">@cards[i]</option>*@
-                if (Model.Player1Card4 == i.ToString())
+                if (Model != null && Model.Player1Card4 == i.ToString())
                 {
                     <option value="@i" selected>@cards[i]</option>
                 }
@@ -136,7 +136,7 @@
             @for (int i = 0; i < cards.Count; i++)
             {
                 @*<option value="@i">@cards[i]</option>*@
-                if (Model.Player1Card5 == i.ToString())
+                if (Model != null && Model.Player1Card5 == i.ToString())
                 {
                     <option value="@i" selected>@cards[i]</option>
                 }
@@ -154,7 +154,7 @@
             @for (int i = 0; i < cards.Count; i++)
             {
                 @*<option value="@i">@cards[i]</option>*@
-                if (Model.Player2Card1 == i.ToString())
+                if (Model != null && Model.Player2Card1 == i.ToString())
                 {
                     <option value="@i" selected>@cards[i]</option>
                 }
@@ -169,7 +169,7 @@
             @for (int i = 0; i < cards.Count; i++)
             {
                 @*<option value="@i">@cards[i]</option>*@
-                if (Model.Player2Card2 == i.ToString())
+                if (Model != null && Model.Player2Card2 == i.ToString())
                 {
                     <option value="@i" selected>@cards[i]</option>
                 }
@@ -184,7 +184,7 @@
             @for (int i = 0; i < cards.Count; i++)
             {
                 @*<option value="@i">@cards[i]</option>*@
-                if (Model.Player2Card3 == i.ToString())
+                if (Model != null && Model.Player2Card3 == i.ToString())
                 {
                     <option value="@i" selected>@cards[i]</option>
                 }
@@ -199,7 +199,7 @@
             @for (int i = 0; i < cards.Count; i++)
             {
                 @*<option value="@i">@cards[i]</option>*@
-                if (Model.Player2Card4 == i.ToString())
+                if (Model != null && Model.Player2Card4 == i.ToString())
                 {
                     <option value="@i" selected>@cards[i]</option>
                 }
@@ -214,7 +214,7 @@
             @for (int i = 0; i < cards.Count; i++)
             {
                 @*<option value="@i">@cards[i]</option>*@
-                if (Model.Player2Card5 == i.ToString())
+                if (Model != null && Model.Player2Card5 == i.ToString())
                 {
                     <option value="@i" selected>@cards[i]</option>
                 }

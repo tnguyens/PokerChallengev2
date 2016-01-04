@@ -10,11 +10,11 @@ namespace PokerApp.Controllers
     public class PokerController : Controller
     {
         // GET: Poker
-        public ActionResult Index(PokerHandFromController pokerHand)
+        public ActionResult Index()//PokerHandFromController pokerHand
         {
             //reset score at initial point
             Session.Clear();
-            return View("Index", pokerHand);
+            return View();//"Index", pokerHand
         }
 
         public ActionResult DetermineWinner(PokerHandFromView pokerHand)
@@ -173,7 +173,7 @@ namespace PokerApp.Controllers
 
             };
 
-            return RedirectToAction("Index", viewModel);
+            return PartialView("Index", viewModel);
         }
 
         //calculate points for player
