@@ -10,11 +10,11 @@ namespace PokerApp.Controllers
     public class PokerController : Controller
     {
         // GET: Poker
-        public ActionResult Index()
+        public ActionResult Index(PokerHandFromController pokerHand)
         {
             //reset score at initial point
             Session.Clear();
-            return View();
+            return View("Index", pokerHand);
         }
 
         public ActionResult DetermineWinner(PokerHandFromView pokerHand)
@@ -60,13 +60,20 @@ namespace PokerApp.Controllers
             //each player
            // testing purposes variables.
             //bool testValue1 = arePlayersOk(player1, player2);
-            //bool testValue2 = player1.isValid();
-            //bool testValue3 = player2.isValid();
+            bool Player1Valid = player1.isValid();
+            bool Player2Valid = player2.isValid();
 
-            if (player1.isValid() == false || player2.isValid() == false)
+            if (Player1Valid == false || Player2Valid == false)
             {
                 winner = "Undetermined";
-                errorMessage = "Invalid hand(s)";
+                if (!Player1Valid)
+                {
+                    errorMessage = "Invalid Player 1 Hand";
+                }
+                else
+                {
+                    errorMessage = "Invalid Player 2 Hand";
+                }
             }
             //both player
             else if (arePlayersOk(player1, player2) == false)
@@ -152,11 +159,21 @@ namespace PokerApp.Controllers
                 Winner = winner,
                 Player1Wins = player1Wins,
                 Player2Wins = player2Wins,
-                Error = errorMessage
+                Error = errorMessage,
+                Player1Card1 = pokerHand.Player1Card1,
+                Player1Card2 = pokerHand.Player1Card2,
+                Player1Card3 = pokerHand.Player1Card3,
+                Player1Card4 = pokerHand.Player1Card4,
+                Player1Card5 = pokerHand.Player1Card5,
+                Player2Card1 = pokerHand.Player2Card1,
+                Player2Card2 = pokerHand.Player2Card2,
+                Player2Card3 = pokerHand.Player2Card3,
+                Player2Card4 = pokerHand.Player2Card4,
+                Player2Card5 = pokerHand.Player2Card5
 
             };
 
-            return PartialView("Index", viewModel);
+            return RedirectToAction("Index", viewModel);
         }
 
         //calculate points for player
