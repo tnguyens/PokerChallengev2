@@ -88,7 +88,7 @@ namespace PokerApp.Models
 
                 for (j = i + 1; j < Cards.Count; j++)
                 {
-                    if (Cards[j].Rank > Cards[min].Rank)
+                    if (Cards[j].Index > Cards[min].Index)
                     {
                         min = j;
                     }

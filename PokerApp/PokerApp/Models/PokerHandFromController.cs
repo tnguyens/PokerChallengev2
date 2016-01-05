@@ -11,6 +11,7 @@ namespace PokerApp.Models
         public int Player1Wins { get; set; }
         public int Player2Wins { get; set; }
         public string Error { get; set; }
+        public string WinFactor { get; set; }
 
         public string Player1Card1 { get; set; }
         public string Player1Card2 { get; set; }

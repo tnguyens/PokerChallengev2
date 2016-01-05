@@ -44,6 +44,7 @@ namespace PokerApp.Controllers
             //return variable
             string winner = string.Empty;
             string errorMessage = string.Empty;
+            string winnerFactor = string.Empty;
             //setting session values of scores
             if(Session["win1s"] == null)
             {
@@ -93,12 +94,14 @@ namespace PokerApp.Controllers
                     winner = "Player 1";
                     errorMessage = "";
                     player1Wins++;
+                    winnerFactor = WinningFactor(player1CardPoint);
                 }
                 else if (pointDiff < 0)
                 {
                     winner = "Player 2";
                     errorMessage = "";
                     player2Wins++;
+                    winnerFactor = WinningFactor(player2CardPoint);
                 }
                 else
                 {
@@ -112,12 +115,14 @@ namespace PokerApp.Controllers
                             winner = "Player 2";
                             errorMessage = "";
                             player2Wins++;
+                            winnerFactor = WinningFactor(player2CardPoint);
                         }
                         else
                         {
                             winner = "Player 1";
                             errorMessage = "";
                             player1Wins++;
+                            winnerFactor = WinningFactor(player1CardPoint);
                         }
                     }
                     //for both hands may have a same thing, compare that same hand using the high card of the hand.
@@ -131,12 +136,14 @@ namespace PokerApp.Controllers
                                 winner = "Player 1";
                                 errorMessage = "";
                                 player1Wins++;
+                                winnerFactor = WinningFactor(player1CardPoint);
                             }
                             else
                             {
                                 winner = "Player 2";
                                 errorMessage = "";
                                 player2Wins++;
+                                winnerFactor = WinningFactor(player2CardPoint);
                             }
                         }
                         //only case where game is a tie that is when the players have the same thing, which nerver happens bc of duplication checking
@@ -160,6 +167,7 @@ namespace PokerApp.Controllers
                 Player1Wins = player1Wins,
                 Player2Wins = player2Wins,
                 Error = errorMessage,
+                WinFactor = winnerFactor,
                 Player1Card1 = pokerHand.Player1Card1,
                 Player1Card2 = pokerHand.Player1Card2,
                 Player1Card3 = pokerHand.Player1Card3,
@@ -243,6 +251,49 @@ namespace PokerApp.Controllers
                 }
             }
             return true;
+        }
+
+        //The function will return what winner has to be a winner.
+        private string WinningFactor( int score)
+        {
+            if (score == 1)
+            {
+                return "because of One Pair";
+            }
+            else if (score == 2)
+            {
+                return "because of Two Pairs";
+            }
+            else if (score == 4)
+            {
+                return "because of Three of a Kind";
+            }
+            else if (score == 8)
+            {
+                return "because of a Straight";
+            }
+            else if (score == 16)
+            {
+                return "because of a Flush";
+            }
+            else if (score == 32)
+            {
+                return "because of a Full House";
+            }
+            else if (score == 64)
+            {
+                return "because of Four of a Kind";
+            }
+            else if (score == 128)
+            {
+                return "because of a Straight Flush";
+            }
+            else if (score == 256)
+            {
+                return "because of a Royal Flush";
+            }
+
+            return "by High Card";
         }
     }
 }
